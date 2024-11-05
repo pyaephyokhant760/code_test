@@ -17,7 +17,10 @@ Route::post("login", [AuthController::class, "login"]);
 Route::post("logout", [AuthController::class, "logout"])->middleware('auth:sanctum');
 
 
-Route::apiResource('users', UserController::class);
-Route::apiResource('companys', CompanyController::class);
-Route::apiResource('employees',EmployeeController::class);
-
+Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
+    Route::middleware('adminMiddleware')->group(function () {
+        Route::apiResource('users', UserController::class);
+        Route::apiResource('companys', CompanyController::class);
+        Route::apiResource('employees', EmployeeController::class);
+    });
+});
