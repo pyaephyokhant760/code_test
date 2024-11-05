@@ -17,10 +17,20 @@ class CompanyController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Company::paginate(5);
-        return ['data' => $data];
+        $query = Company::query();
+
+        if ($request->has('name')) {
+            $query->where('name', 'like', '%' . $request->name . '%');
+        }
+
+        if ($request->has('email')) {
+            $query->where('email', 'like', '%' . $request->email . '%');
+        }
+
+        $Companies = $query->paginate(5);
+        return response()->json($Companies);
     }
 
     /**
