@@ -13,8 +13,9 @@ php artisan key:generate
 ```
 
 # for migrate
+```
  php artisan migrate
-
+```
 # Setting up for artisan cmd
 # run project
 ```
