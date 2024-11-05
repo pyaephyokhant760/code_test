@@ -13,4 +13,9 @@ class Employee extends Model
         'phone',
         'profile',
     ];
+
+    public function company()
+    {
+        return $this->belongsTo(company::class);
+    }
 }
